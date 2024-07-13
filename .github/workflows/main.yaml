@@ -25,4 +25,4 @@ jobs:
           context: backend/app
           file: backend/app/Dockerfile
           push: true
-          tags: ghcr.io/sortedstartup/course-k8s-top-down:latest
+          tags: ghcr.io/${{ github.repository }}/course-k8s-top-down:latest
