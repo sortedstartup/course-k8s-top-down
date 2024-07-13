@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <ul id="todo-list"></ul>
+  <input type="text" id="new-todo" placeholder="New todo">
+  <button onclick="addTodo()">Add</button>
+  <br/>
+  <br/>
+  <br/>
+  <div>Served from $POD_NAME$ </div>
+
+  <script>
+    async function fetchTodos() {
+      const response = await fetch('/api/todos');
+      const data = await response.json();
+      const todoList = document.getElementById('todo-list');
+      todoList.innerHTML = '';
+      data.todos.forEach(todo => {
+        const li = document.createElement('li');
+        li.textContent = todo.text;
+        todoList.appendChild(li);
+      });
+    }
+
+    async function addTodo() {
+      const newTodo = document.getElementById('new-todo').value;
+      await fetch('/api/todos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ todo: newTodo })
+      });
+      document.getElementById('new-todo').value = '';
+      fetchTodos();
+    }
+
+    fetchTodos();
+  </script>
+</body>
+</html>
