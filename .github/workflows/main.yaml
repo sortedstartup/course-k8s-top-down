@@ -20,10 +20,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          context: backend/app
-          file: backend/app/Dockerfile
-          push: true
-          tags: ghcr.io/${{ github.repository }}/course-k8s-top-down:latest
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker buildx build --platform linux/amd64 -t ghcr.io/${{ github.repository }}/nodejs-app:latest --push .
