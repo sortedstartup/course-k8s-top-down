@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const USE_IN_MEMORY = true
-const POD_NAME = process.env.POD_NAME || 'default-pod';
+const POD_NAME = process.env.HOSTNAME || 'default-pod';
 
 // In-memory datastore
 let todos = [];
