@@ -29,5 +29,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -f backend/app/Dockerfile -t ghcr.io/${{ github.repository }}/nodejs-app:${{ env.GIT_SHA }} ./backend/app
-          docker push ghcr.io/${{ github.repository }}/nodejs-app:${{ env.GIT_SHA }}
+          docker build -f backend/app/Dockerfile -t ghcr.io/${{ github.repository }}/nodejs-app:${{ env.GITHUB_SHA }} ./backend/app
+          docker push ghcr.io/${{ github.repository }}/nodejs-app:${{ env.GITHUB_SHA }}
