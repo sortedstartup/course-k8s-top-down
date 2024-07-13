@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'backend/app/**'
+      - '.github/workflows/main.yaml'
 
 jobs:
   build-and-push:
